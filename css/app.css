@@ -1,0 +1,45 @@
+h1{
+    color:red;
+}
+
+#a1{
+    color:orange;
+}
+.abc{
+    color: deeppink;
+}
+.xyz{
+    font-size: 30px;
+}
+p.abc.xyz{
+
+}
+html body p#a1 span{
+
+}
+
+#b1{
+    /* color: rgb(150,50,50); red green blue: 0 -> 255 */
+    color: #ff0000;
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: justify;
+    font-weight: 400;/* thin(100) light(300) normal(400) 
+    medium(500) semi-bold(600) bold(700) extra-bold(800) black(900) */
+    text-transform: none;/* uppercase lowercase capitalize */
+    text-decoration: none;/* underline line-through overline none */
+    line-height: 1.25;/* 1.25 x 30px */
+    background-color: antiquewhite;
+    background-image: url("..");
+    background-size: cover ; /* contain cover */
+    background-repeat: repeat;/* repeat-x repeat-y */
+}
+.t3h{
+    color:blue;
+}
+p{
+    color:green;
+}
+p{
+    color: black;
+}
