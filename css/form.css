@@ -1,0 +1,9 @@
+input[type=text]{
+    background-color: green;
+}
+input[name=pwd]{
+    background-color: palevioletred;
+}
+input[name=age][type=number]{
+    background-color: aquamarine;
+}

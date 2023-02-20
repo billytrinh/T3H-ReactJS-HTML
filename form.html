@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form demo</title>
+    <link rel="stylesheet" href="vendors/bootstrap5.3/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/form.css"/>
+</head>
+<body>
+    <section>
+        <div class="container">
+            <form action="#" method="post">
+                <label>Fullname</label>
+                <input type="text" name="fullname" placeholder="Fullname" required/>
+                <br/>  
+                <label>Email</label>
+                <input type="email" name="email" placeholder="Email.." required/> 
+                <br/> 
+                <label>Password</label>
+                <input type="password" name="pwd" placeholder="Password.." required/> 
+                <br/> 
+                <label>Telephone</label>
+                <input type="tel" name="telephone" placeholder="Telephone.." required/>
+                <br/> 
+                <label>Age</label>
+                <input type="number" value="18" min="0" max="100" name="age" placeholder="Age.."/>
+                <br/> 
+                <label>Birthday</label>
+                <input type="date" name="birthday" placeholder="Birthday.."/>
+                <input type="week" name="birthday" placeholder="Birthday.."/>
+                <input type="month" name="birthday" placeholder="Birthday.."/>
+                <input type="time" name="birthday" placeholder="Birthday.."/>
+                <br/> 
+                <label>Gender</label>
+                <label><input type="radio" name="gender" value="Nam"/>Nam</label>
+                <label><input type="radio" name="gender" value="Nữ"/>Nữ</label>
+                <label><input type="radio" name="gender" value="Khác"/>Khác</label>
+                <br/>
+                <label>Favorites</label>
+                <label><input type="checkbox" name="favorite[]" value="playgame"/>Play game</label>
+                <label><input type="checkbox" name="favorite[]" value="shopping"/>Shopping</label>
+                <label><input type="checkbox" name="favorite[]" value="watchmovies"/>Watch movies</label>
+                <br/>
+                <label>City</label>
+                <select name="city">
+                    <optgroup label="Mien Bac">
+                        <option value="HN">Hà Nội</option>
+                        <option value="HP">Hai Phong</option>
+                    </optgroup>
+                    <optgroup label="Mien Trung">
+                        <option value="DN">Da Nang</option>
+                    </optgroup>
+                    <optgroup label="Mien Nam">
+                        <option value="SG">TP HCM</option>
+                        <option value="CT">Can Tho</option>
+                    </optgroup>
+                </select>
+                <br/>
+                <label>More information</label>
+                <textarea name="more_info" placeholder="More information"></textarea>
+                <button type="submit">Submit</button>
+                <button type="reset">Reset</button>
+                <button type="buton">Button</button>
+            </form>
+        </div>
+    </section>
+</body>
+</html>
