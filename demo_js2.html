@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo JS 2</title>
+    <link rel="stylesheet" href="vendors/bootstrap5.3/css/bootstrap.css"/>
+</head>
+<body>
+    <section>
+        <div class="container">
+            <h1 id="heading">Demo heading</h1>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <h2>
+                <span id="min">00</span>
+                <span>:</span>
+                <span id="sec">00</span>
+            </h2>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <ul>
+                <li class="mon"></li>
+                <li class="mon"></li>
+                <li class="mon"></li>
+                <li class="mon"></li>
+                <li class="mon"></li>
+            </ul>
+        </div>
+    </section>
+    <script type="text/javascript">
+        // var p = prompt("Nhập tiêu đề:"); 
+        // DOM 
+    //    var hd = document.getElementById("heading");  
+    //    hd.innerText  = p;
+        // hd.innerHTML += "<i>"+p+"</i>";
+        // hd.style.color = p;
+        // hd.style.backgroundColor = "orange";
+
+        // var t = prompt("Nhập số phút");
+        var min= 0;//parseInt(t);
+        var sec = 0;
+        var t = setInterval(function(){
+            var m = document.getElementById("min");
+            var s = document.getElementById("sec");
+            // if(min < 10){
+            //     m.innerText = "0"+ min;
+            // }else{
+            //     m.innerText = min;
+            // }
+             // toán tử 3 ngôi       
+            m.innerText = min<10?"0"+min:min;
+            s.innerText = sec<10?"0"+sec:sec;
+
+            sec--;
+            if(sec < 0){
+                sec = 59;
+                min--;
+            }
+            if(min < 0){
+                clearInterval(t);
+            }
+        },1000);
+
+        var menu = [
+            "Lẩu tứ xuyên",
+            "Vịt quay bắc kinh",
+            "Phở Hà Nội",
+            "Bún bò",
+            "Phở Lý Quốc Sư"
+        ];
+        var mon = document.getElementsByClassName("mon");
+        for(var i=0;i<mon.length;i++){
+            mon[i].innerText = menu[i];
+        }
+        var li = document.getElementsByTagName("li");
+        var qs = document.querySelectorAll("ul li.mon");
+
+        // Jackpot
+        // Khi điền số nào đó hợp lệ, sẽ hiển thị số đó ra 
+        // ngoài giao diện 
+        // Sau đó sẽ sinh ngẫu nhiên 6 số hợp lệ xuống bên dưới 
+        // giao diện. (Số ngẫu nhiên phải 15s mới ra 1 số)
+        // Cuôi cùng thông báo kết quả: Nếu có giải thưởng thì 
+        // chữ màu xanh, 
+        // không trúng sẽ hiện chữ màu đỏ
+    </script>
+</body>
+</html>
