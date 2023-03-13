@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="vendors/bootstrap5.3/css/bootstrap.min.css"/>
+</head>
+<body>
+    <section>
+        <div class="container">
+            <h1 id="pn">Product name</h1>
+            <h2 id="pp">Price</h2>
+            <h3 id="pc">Danh mục</h3>
+            <ul id="hashtag">
+                
+            </ul>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="card" style="width: 18rem;">
+                <img id="pimg" src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 id="pt" class="card-title">Card title</h5>
+                  <p id="pd" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <script type="text/javascript">
+        var product = {
+            name: "Iphone 14 Pro Max",
+            price: 1000,
+            category:{
+                name: "Smart phone",
+                sub: {
+                    name:"Apple Phone"
+                }
+            },
+            hashtag: [
+                {
+                    tag: "phone"
+                },
+                {
+                    tag: "apple"
+                },
+                {
+                    tag: "smart phone"
+                },
+                {
+                    tag: "iphone"
+                },
+            ]
+
+        }
+        document.getElementById("pn").innerText = product.name;
+        document.getElementById("pp").innerText = product.price;
+        document.getElementById("pc").innerText = product.category.name;
+
+        var ht = product.hashtag; // array
+        for(var i=0;i<ht.length;i++){
+            var li = "<li>"+ht[i].tag+"</li>";
+            var ul = document.getElementById("hashtag");
+            ul.innerHTML += li;
+        }
+
+        // AJAX
+        var xhttp = new XMLHttpRequest(); // shipper
+        xhttp.onload = function(){ // callback function
+           // những việc sẽ làm khi nhận được dữ liệu trả về 
+           var rs = this.responseText;
+           var p = JSON.parse(rs);
+           document.getElementById("pimg").src = p.thumbnail;
+            document.getElementById("pt").innerText = p.title;
+            document.getElementById("pd").innerText = p.description;
+        }    
+        xhttp.open("GET","https://dummyjson.com/products/1");
+        xhttp.send();
+
+        
+
+
+        
+    </script>
+</body>
+</html>

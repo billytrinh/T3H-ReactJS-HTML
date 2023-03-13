@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="vendors/bootstrap5.3/css/bootstrap.min.css"/>
+</head>
+<body>
+    <section>
+        <div class="container">
+            <h2>Các sản phẩm liên quan</h2>
+            <div class="row" id="list">
+                
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript">
+        // AJAX
+        var xhttp = new XMLHttpRequest(); // shipper
+        xhttp.onload = function(){ // callback function
+           // những việc sẽ làm khi nhận được dữ liệu trả về 
+           var rs = this.responseText;
+           var data = JSON.parse(rs);
+        //    console.log(data);
+           var products = data.products;
+           for(var i =0;i<products.length;i++){
+            var p = products[i];
+            var thumb = p.thumbnail;
+            var title = p.title;
+            var desc = p.description;
+            var li = `<div class="col-3">
+                    <div class="card" style="width: 18rem;">
+                        <img src="${thumb}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">${title}</h5>
+                          <p class="card-text">${desc}</p>
+                          <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>`;
+            document.getElementById("list").innerHTML += li;        
+        }
+        }    
+        xhttp.open("GET","https://dummyjson.com/products?limit=10");
+        xhttp.send();
+
+
+        
+    </script>
+</body>
+</html>
