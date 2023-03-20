@@ -13,16 +13,16 @@
             <select id="select-city" class="form-control" onchange="loadWeather()">
                 <option value="hanoi">Hà Nội</option>
                 <option value="saigon">TP HCM</option>
-                <option value="lodon">London</option>
+                <option value="london">London</option>
                 <option value="new york">New York</option>
             </select>  
-            <select id="units" class="form-control">
+            <select id="units" class="form-control" onchange="loadWeather()">
                 <option value="C">C</option>
                 <option value="K">K</option>
             
             </select>    
             <h1 id="city">Hà Nội, Việt Nam</h1>
-            <h2><span id="temp">29</span><sup>o</sup>C</h2>
+            <h2><span id="temp">29</span><sup>o</sup><span id="span-units">C</span></h2>
             <p id="desc">Hôm nay trời nhiều mây</p>
         </div>
     </section>
@@ -35,12 +35,17 @@
             document.getElementById("temp").innerText = data.main.temp;
             document.getElementById("desc").innerText = data.weather[0].description;
         }
-        xhttp.open("GET","https://api.openweathermap.org/data/2.5/weather?q=london&appid=09a71427c59d38d6a34f89b47d75975c&units=metric");
+        xhttp.open("GET","https://api.openweathermap.org/data/2.5/weather?q=hanoi&appid=09a71427c59d38d6a34f89b47d75975c&units=metric");
         xhttp.send();
 
         function loadWeather(){
             var city = document.getElementById("select-city").value;
             var units = document.getElementById("units").value;
+            document.getElementById("span-units").innerText = units;
+            var metric = "";
+            if(units == 'C'){
+                metric = "units=metric";
+            }
             var xhttp = new XMLHttpRequest();
             xhttp.onload = function(){
                 var data = this.responseText;// string
@@ -49,7 +54,7 @@
                 document.getElementById("temp").innerText = data.main.temp;
                 document.getElementById("desc").innerText = data.weather[0].description;
             }
-            xhttp.open("GET",`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=09a71427c59d38d6a34f89b47d75975c&units=metric`);
+            xhttp.open("GET",`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=09a71427c59d38d6a34f89b47d75975c&${metric}`);
             xhttp.send();
         }
     </script>
