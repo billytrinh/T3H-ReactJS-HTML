@@ -79,6 +79,11 @@
             page++;
             searchProduct();
         }
+
+        function goToPage(p){
+            page = p;
+            searchProduct();    
+        }
         function searchProduct(){
             event.preventDefault();
             document.getElementById("box-loading").style.display = "block";
@@ -114,9 +119,8 @@
                 // nap các trang 1 2 3 ...
                 var total_page = data.total % 12 == 0 ? data.total/12: parseInt(data.total/12)+1;
                 for(var i=1;i<=total_page;i++){
-                    var active = page==i?"active":"";
-                    if(page == i)
-                        p_html += `<li class="page-item ${active}"><a class="page-link" href="#">${i}</a></li>`;
+                    var active = page==i?"active":"";                    
+                    p_html += `<li class="page-item ${active}"><a onclick="goToPage(${i})" class="page-link" href="#">${i}</a></li>`;
                 }
                 p_html+= `<li class="page-item"><a onclick="nextPage()" class="page-link" href="#">Next</a></li>`;
                 document.getElementById("pagination").innerHTML = p_html;
