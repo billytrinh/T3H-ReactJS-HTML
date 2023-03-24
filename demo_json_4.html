@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Products</title>
     <link rel="stylesheet" href="vendors/bootstrap5.3/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/loading.css"/>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -52,9 +53,35 @@
                 </div>
             </div>
       </section>
+      <nav aria-label="Page navigation example">
+        <div class="container">
+            <ul class="pagination" id="pagination">
+                
+            </ul>
+        </div>
+      </nav>
+      <div id="box-loading">
+        <div id="bg-fade"></div>
+        <div id="loading" class="spinner-border text-light" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        </div>
       <script type="text/javascript">
+        var page = 1;
+        function prevPage(){
+            if(page > 1){
+                page--;
+                searchProduct();
+            }
+        
+        }
+        function nextPage(){
+            page++;
+            searchProduct();
+        }
         function searchProduct(){
             event.preventDefault();
+            document.getElementById("box-loading").style.display = "block";
             var v = document.getElementById("search").value;   
             
             var xhttp = new XMLHttpRequest();
@@ -70,7 +97,7 @@
                     var price = products[i].price;
                     html += `<div class="col-3">
                         <div class="card" style="width: 18rem;">
-                            <img src="${thumb}" class="card-img-top" alt="...">
+                            <img height="190" src="${thumb}" class="card-img-top" alt="...">
                             <div class="card-body">
                               <h5 class="card-title">${name}</h5>
                               <p class="card-text">${desc}</p>
@@ -79,10 +106,23 @@
                           </div>
                     </div>`;
                 }
+                
                 document.getElementById("list").innerHTML = html;
-            }
+                document.getElementById("box-loading").style.display = "none";
 
-            xhttp.open("GET",`https://dummyjson.com/products/search?q=${v}`);
+                var p_html = `<li class="page-item"><a onclick="prevPage()" class="page-link" href="#">Previous</a></li>`;
+                // nap các trang 1 2 3 ...
+                var total_page = data.total % 12 == 0 ? data.total/12: parseInt(data.total/12)+1;
+                for(var i=1;i<=total_page;i++){
+                    var active = page==i?"active":"";
+                    if(page == i)
+                        p_html += `<li class="page-item ${active}"><a class="page-link" href="#">${i}</a></li>`;
+                }
+                p_html+= `<li class="page-item"><a onclick="nextPage()" class="page-link" href="#">Next</a></li>`;
+                document.getElementById("pagination").innerHTML = p_html;
+            }
+            var skip = (page - 1)*12;    
+            xhttp.open("GET",`https://dummyjson.com/products/search?q=${v}&limit=12&skip=${skip}`);
             xhttp.send();
         }
       </script>
