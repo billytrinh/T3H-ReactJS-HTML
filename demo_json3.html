@@ -27,6 +27,8 @@
         </div>
     </section>
     <script type="text/javascript">
+        var cart = localStorage.getItem("cart");
+        console.log(cart);
         var xhttp = new XMLHttpRequest();
         xhttp.onload = function(){
             var data = this.responseText;// string

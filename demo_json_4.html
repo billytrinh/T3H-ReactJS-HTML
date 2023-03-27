@@ -80,6 +80,7 @@
             <img src="" id="quickViewThumb" class="img-thumbnail"/>
             <p id="quickViewPrice"></p>
             <p id="quickViewCategory"></p>
+            <div id="cart"></div>
         </div>
       
       </div>
@@ -87,6 +88,27 @@
   </div>
       <script type="text/javascript">
         var page = 1;
+        var cart = localStorage.getItem("cart");
+        if(cart == null){
+          cart = [];
+        }else{
+          cart = JSON.parse(cart);
+        }
+        console.log(cart);
+        function addToCart(x){
+          var xhttp = new XMLHttpRequest();
+           xhttp.onload = function(){
+              var rs = this.responseText;
+              var data = JSON.parse(rs);
+              //console.log(data);
+              cart.push(data);
+              localStorage.setItem("cart",JSON.stringify(cart));
+           }
+           xhttp.open("GET",`https://dummyjson.com/products/${x}`);
+           xhttp.send();
+
+        
+        }
         function prevPage(){
             if(page > 1){
                 page--;
@@ -155,10 +177,13 @@
            xhttp.onload = function(){
               var rs = this.responseText;
               var data = JSON.parse(rs);
+              var id = data.id;
               document.getElementById("quickViewName").innerText = data.title;
               document.getElementById("quickViewCategory").innerText = data.category;
               document.getElementById("quickViewPrice").innerText = data.price;
               document.getElementById("quickViewThumb").src = data.thumbnail;
+              var html = `<button type="button" onclick="addToCart(${id})" class="btn btn-danger">Add to cart</button>`;
+              document.getElementById("cart").innerHTML = html;
            }
            xhttp.open("GET",`https://dummyjson.com/products/${x}`);
            xhttp.send();
