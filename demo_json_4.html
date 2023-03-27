@@ -96,18 +96,28 @@
         }
         console.log(cart);
         function addToCart(x){
-          var xhttp = new XMLHttpRequest();
-           xhttp.onload = function(){
-              var rs = this.responseText;
-              var data = JSON.parse(rs);
-              //console.log(data);
-              cart.push(data);
+          var f = false;
+          for(var i=0;i<cart.length;i++){
+            if(x == cart[i].id){
+              f = true;
+              cart[i].buy_qty =  cart[i].buy_qty+1;
               localStorage.setItem("cart",JSON.stringify(cart));
-           }
-           xhttp.open("GET",`https://dummyjson.com/products/${x}`);
-           xhttp.send();
-
-        
+              break;
+            }
+          }
+          if(f==false){
+            var xhttp = new XMLHttpRequest();
+            xhttp.onload = function(){
+                var rs = this.responseText;
+                var data = JSON.parse(rs);
+                //console.log(data);
+                data.buy_qty = 1;
+                cart.push(data);
+                localStorage.setItem("cart",JSON.stringify(cart));
+            }
+            xhttp.open("GET",`https://dummyjson.com/products/${x}`);
+            xhttp.send();
+          }
         }
         function prevPage(){
             if(page > 1){
