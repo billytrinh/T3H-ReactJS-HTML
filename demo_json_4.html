@@ -88,14 +88,14 @@
   </div>
       <script type="text/javascript">
         var page = 1;
-        var cart = localStorage.getItem("cart");
-        if(cart == null){
-          cart = [];
-        }else{
-          cart = JSON.parse(cart);
-        }
-        console.log(cart);
+        
         function addToCart(x){
+          var cart = localStorage.getItem("cart");
+          if(cart == null){
+            cart = [];
+          }else{
+            cart = JSON.parse(cart);
+          }
           var f = false;
           for(var i=0;i<cart.length;i++){
             if(x == cart[i].id){
