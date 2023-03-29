@@ -19,6 +19,7 @@
                             <th>Price</th>
                             <th>Qty</th>
                             <th>Subtotal</th>
+                            <th></th>
                         </thead>
                         <tbody id="list">
                             
@@ -33,30 +34,54 @@
         </div>
     </section>
     <script type="text/javascript">
-        var cart = localStorage.getItem("cart");
-        if(cart == null){
-          cart = [];
-        }else{
-          cart = JSON.parse(cart);
+        reloadHtml();
+        function removeItem(x){
+            var cart = localStorage.getItem("cart");
+            if(cart == null){
+            cart = [];
+            }else{
+            cart = JSON.parse(cart);
+            }
+            var c = [];
+            for(var i=0;i<cart.length;i++){
+                if(cart[i].id != x){
+                    c.push(cart[i]);    
+                }
+            }
+            localStorage.setItem("cart",JSON.stringify(c));
+            // window.location.reload();
+                
+            reloadHtml();
         }
-        var html = ``;
-        var total = 0;
-        for(var i=0;i<cart.length;i++){
-            var img = cart[i].thumbnail;
-            var name = cart[i].title;
-            var price = cart[i].price;
-            var buy_qty = cart[i].buy_qty;
-            total += price*buy_qty;
-            html += `<tr>
-                                <td><img width="150" class="img-thumbnail" src="${img}"/></td>
-                                <td>${name}</td>
-                                <td>${price}$</td>
-                                <td>${buy_qty}</td>
-                                <td>${price*1}$</td>
-                            </tr>`;
+
+        function reloadHtml(){
+            var cart = localStorage.getItem("cart");
+            if(cart == null){
+            cart = [];
+            }else{
+            cart = JSON.parse(cart);
+            }
+            var html = ``;
+            var total = 0;
+            for(var i=0;i<cart.length;i++){
+                var img = cart[i].thumbnail;
+                var name = cart[i].title;
+                var price = cart[i].price;
+                var buy_qty = cart[i].buy_qty;
+                var id = cart[i].id;
+                total += price*buy_qty;
+                html += `<tr>       
+                                    <td><img width="150" class="img-thumbnail" src="${img}"/></td>
+                                    <td>${name}</td>
+                                    <td>${price}$</td>
+                                    <td>${buy_qty}</td>
+                                    <td>${price*buy_qty}$</td>
+                                    <td><span onclick="removeItem(${id})" class="text-danger">X</span></td>
+                                </tr>`;
+            }
+            document.getElementById("list").innerHTML = html;
+            document.getElementById("total").innerText = total;
         }
-        document.getElementById("list").innerHTML = html;
-        document.getElementById("total").innerText = total;
     </script>
 </body>
 </html>
