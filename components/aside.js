@@ -25,13 +25,33 @@
 
 class AsideComponent{
     categories = [
-                "Fashion",
-                "Watch",
-                "Smart Phone",
-                "Tivi",
-                "Machines",
-                "Kitchens"
+                // "Fashion",
+                // "Watch",
+                // "Smart Phone",
+                // "Tivi",
+                // "Machines",
+                // "Kitchens"
             ];
+    constructor(){
+        // truoc khi render phải lấy đc mảng category từ api 
+        // https://dummyjson.com/products/categories
+        this.getCategories();
+        this.render(); 
+    }        
+     getCategories(){
+        let xhttp = new XMLHttpRequest();
+        var categories = [];
+         xhttp.onload =  function(){
+            let rs = this.responseText;
+            categories = JSON.parse(rs);
+            // console.log("1");
+            // console.log(categories);
+        }
+        xhttp.open("GET","https://dummyjson.com/products/categories",false);
+        xhttp.send();
+        //console.log(categories);
+        this.categories = categories;
+    }
     render(){
             let html = ` 
             <aside><ul class="list-group">`;
@@ -47,5 +67,4 @@ class AsideComponent{
             }; 
     }        
 }
-let o = new AsideComponent();
-o.render();
+new AsideComponent();
