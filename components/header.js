@@ -12,7 +12,7 @@ class HeaderComponent{
     tagName = "HeaderComponent";
     constructor(){ // tự động chạy khi có 1 đối tượng của lớp này tạo ra
         this.render();
-    }
+    }// https://dummyjson.com/products?limit=12
     render(){
         let html = `<section><div class="container">
             <h1>Header</h1>
